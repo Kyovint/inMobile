@@ -5,13 +5,13 @@ Authors:
 ||--------------------------||
 Kevin Andres Ardila Sanabria
 
-GitHub: Kyovint
-LinkedIn: Kyovint
+GitHub: https://github.com/Kyovint
+LinkedIn: https://www.linkedin.com/in/kyovint/
 
 ||--------------------------||
 David Alejandro Rojas Espejo
 
-GitHub:
-LinkedIn:
+GitHub: https://github.com/DavidRedz10
+LinkedIn: www.linkedin.com/in/DavidRedz10
 
 ||--------------------------||
