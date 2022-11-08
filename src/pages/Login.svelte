@@ -1,8 +1,10 @@
 <script>
     import {auth}from "../firebase.js"
     import {GoogleAuthProvider, signInWithPopup}from "firebase/auth"
+    import { createUserWithEmailAndPassword } from "firebase/auth"
     import loggedUser from '../stores/auth'
     import {navigate} from 'svelte-routing'
+    import {field} from 'svelte-forms'
 
     const authProcess = async() =>{
         if(!$loggedUser.IsLoggedIn){
@@ -10,12 +12,27 @@
             const provider = new GoogleAuthProvider();
             const res= await signInWithPopup(auth, provider);
             loggedUser.saveUser(res.user)
-            navigate('/Home', {replace: true})
+            navigate('/', {replace: true})
             }catch(error){
                 console.log(error)
             }
         }
     }
+
+    const registerUser = async() =>{
+        if(!$loggedUser.IsLoggedIn){
+            try{
+                const res= await createUserWithEmailAndPassword(auth, $correo.value, $contraseña.value);
+                console.log(res)
+            }catch(error){
+                console.log(error)
+            }
+        }
+    }
+
+    const correo = field('correo', '');
+    const contraseña = field('contraseña', '');
+    
 </script>
 
 <div class="login-container">
@@ -26,10 +43,10 @@
         <div class="form-part">
             <div class="form">
                 <h2>Inicio de sesión</h2>
-                <input type="text" placeholder="Usuario">
-                <input type="password" placeholder="Contraseña">
+                <input type="text" placeholder="Correo" bind:value={$correo.value}>
+                <input type="password" placeholder="Contraseña" bind:value={$contraseña.value}>
                 <span>¿Olvidaste tu contraseña?</span>
-                <button class="form-button"> Iniciar sesión</button>
+                <button class="form-button" on:click={registerUser}> Iniciar sesión</button>
 
                 <div class="divider">
                     <span style="font-size: 20px; background-color: white; padding: 0 10px;">
